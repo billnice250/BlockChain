@@ -76,7 +76,7 @@ public class BlockChainController : ControllerBase
 
     public class RequestData
     {
-        public string Data { get; set; }
+        public string? Data { get; set; }
         public int Proof { get; set; }
         public int Nonce { get; set; }
     }
