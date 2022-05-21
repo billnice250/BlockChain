@@ -6,31 +6,57 @@ public static class BlockChainService
 
     public static List<Block> GetChain()
     {
-        return chain.AsEnumerable().ToList();
+        return chain;
     }
+    static BlockChainService() => Initialize();
 
-    public static Block? AddBlock(string data ,int proof ,int nonce)
+    public static Block? AddBlock(string data, int nonce, string previousHash, string hash)
     {
+        var newBlock = new Block();
+        newBlock.Data = data;
+        newBlock.Nonce = nonce;
+        newBlock.PreviousHash = previousHash;
+        newBlock.Hash = hash;
 
-        if (GetChain() == null)
+        // for showcase only
+        // only in test mode
+        if (Constants.RUNTIME_prod && Utils.ValidateProofOfWork(newBlock) != CheckProofResult.Valid)
         {
-        //   _logger.LogError("Chain is null");
             return null;
+        }{
+                    newBlock.PreviousHash = GetLastBlock().Hash
+                ?? "Error";
+
+                    newBlock.Hash = newBlock.ComputeHash();
+
         }
-        Block block = new Block(data,proof,nonce);
-        block.PreviousHash = GetChain().Last().Hash!;
-        block.Index = GetChain().Count + 1;
-        block.TimeStamp = DateTime.Now;
-        block.Hash = block.ComputeHash();
 
-
-        chain.Add(block);
-        return block;
+        newBlock.Index = chain.Count + 1;
+        newBlock.TimeStamp = DateTime.Now;
+        chain.Add(newBlock);
+        return newBlock;
     }
 
-     static BlockChainService(){
+
+
+    public static void Initialize()
+    {
+        if (chain.Count == 0)
+        {
+
             Block genesisBlock = new Block();
+            genesisBlock.Data = "Genesis Block";
+            genesisBlock.Hash = "0";
+            genesisBlock.PreviousHash = "0";
+            genesisBlock.Nonce = 0;
+            genesisBlock.Index = 0;
+            genesisBlock.TimeStamp = DateTime.Now;
+            genesisBlock.Hash = genesisBlock.ComputeHash();
+
+            genesisBlock.Hash = "0000" + genesisBlock.Hash.Substring(4);
             chain.Add(genesisBlock);
+
+        }
 
     }
 
@@ -47,7 +73,7 @@ public static class BlockChainService
             return null;
         }
 
-        if(index>=0 && index<GetChain().Count)
+        if (index >= 0 && index < GetChain().Count)
         {
             return GetChain()[(int)index];
         }
@@ -56,12 +82,7 @@ public static class BlockChainService
 
     public static Block? GetLastBlock()
     {
-        if (GetChain() == null)
-        {
-            // _logger.LogError("Chain is null");
-            return null;
-        }
-        return GetChain().Last();
+        return GetChain().LastOrDefault();
     }
 
     public static int GetChainLength()

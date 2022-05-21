@@ -48,12 +48,12 @@ public class BlockChainController : ControllerBase
 
         _logger.LogInformation("CreateBlock");
         _logger.LogInformation("Data:", requestData.Data);
-        var block = BlockChainService.AddBlock(requestData.Data ?? "", requestData.Proof, requestData.Nonce);
+        var block = BlockChainService.AddBlock(requestData.Data, requestData.Nonce, requestData.PreviousHash, requestData.Hash);
 
         if (block == null)
         {
-            _logger.LogInformation("Block is null");
-            return Unauthorized();
+            _logger.LogInformation("Block is not created");
+            return Unauthorized("Block with hash " + requestData.Hash + " is not accepted");
         }
         return await Task.FromResult(block);
     }
@@ -76,9 +76,11 @@ public class BlockChainController : ControllerBase
 
     public class RequestData
     {
-        public string? Data { get; set; }
-        public int Proof { get; set; }
+        public string Data { get; set; }
         public int Nonce { get; set; }
+        public string PreviousHash { get; set; }
+        public string Hash { get; set; }
+
     }
 
 
