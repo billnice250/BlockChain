@@ -10,6 +10,16 @@ public static class BlockChainService
     }
     static BlockChainService() => Initialize();
 
+    /// <summary>
+    ///  for adding a new block to the block chain.
+    /// </summary>
+    /// <param name="data"> the data of the new block</param>
+    /// <param name="nonce"> the once choosen for the new block</param>
+    /// <param name="previousHash"> the prev block hash</param>
+    /// <param name="hash"> the hash of the new block </param>
+    /// <returns> null if not accepted or the created block if accepted</returns>
+    /// <exception cref="Exception"> when the previous block couldn't be retreived</exception>
+
     public static Block? AddBlock(string data, int nonce, string previousHash, string hash)
     {
         var newBlock = new Block();
@@ -24,10 +34,8 @@ public static class BlockChainService
         {
             return null;
         }{
-                    newBlock.PreviousHash = GetLastBlock().Hash
-                ?? "Error";
-
-                    newBlock.Hash = newBlock.ComputeHash();
+            newBlock.PreviousHash = GetLastBlock()!.Hash?? throw new Exception ("Last Block Hash couldn't be retreived.");
+            newBlock.Hash = newBlock.ComputeHash();
 
         }
 
@@ -60,7 +68,7 @@ public static class BlockChainService
 
     }
 
-    public static Block? GetBlock(long index)
+    public static Block? GetBlock(int index)
     {
         if (GetChain() == null)
         {
@@ -75,14 +83,14 @@ public static class BlockChainService
 
         if (index >= 0 && index < GetChain().Count)
         {
-            return GetChain()[(int)index];
+            return GetChain()[index];
         }
         return null;
     }
 
     public static Block? GetLastBlock()
     {
-        return GetChain().LastOrDefault();
+        return GetChain().Last()??null;
     }
 
     public static int GetChainLength()

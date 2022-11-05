@@ -16,8 +16,8 @@ public class BlockChainController : ControllerBase
 
 
 
-    // GET: api/CurrentChain
-    [HttpGet]
+    // GET: api/BlockChain/CurrentChain
+    [HttpGet("CurrentChain")]
     public async Task<ActionResult<IEnumerable<Block>>> GetCurrentChain()
     {
         _logger.LogInformation("GetCurrentChain");
@@ -25,8 +25,8 @@ public class BlockChainController : ControllerBase
     }
 
     // GET: api/block/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Block>> GetBlock(long id)
+    [HttpGet("block/{id}")]
+    public async Task<ActionResult<Block>> GetBlock(int id)
     {
 
         _logger.LogInformation("GetBlock id:", id);
@@ -40,27 +40,47 @@ public class BlockChainController : ControllerBase
         return await Task.FromResult(block);
 
     }
-    // POST: api/TodoItems
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [HttpPost]
+    // POST: api/CreateBlock
+    [HttpPost("CreateBlock")]
     public async Task<ActionResult<Block>> CreateBlock(RequestData requestData)
     {
 
         _logger.LogInformation("CreateBlock");
         _logger.LogInformation("Data:", requestData.Data);
-        var block = BlockChainService.AddBlock(requestData.Data, requestData.Nonce, requestData.PreviousHash, requestData.Hash);
 
-        if (block == null)
+
+        try
         {
-            _logger.LogInformation("Block is not created");
-            return Unauthorized("Block with hash " + requestData.Hash + " is not accepted");
+
+            var block = BlockChainService.AddBlock(requestData.Data, requestData.Nonce, requestData.PreviousHash, requestData.Hash);
+
+            if (block == null)
+            {
+                _logger.LogInformation("Block is not created");
+                return Unauthorized("Block with hash " + requestData.Hash + " is not accepted");
+            }
+            return await Task.FromResult(block);
+
         }
-        return await Task.FromResult(block);
+        catch (Exception ex)
+        {
+
+            _logger.LogInformation("Block is not created");
+
+            _logger.LogInformation(ex.Message);
+
+            return StatusCode(500, ex.Message);
+
+        }
+
+
+
+
     }
 
     // PUT: api/GetLastBlock
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [HttpPut("GetLastBlock")]
+    [HttpGet("LatestBlock")]
     public async Task<ActionResult<Block>> GetLastBlock()
     {
         _logger.LogInformation("GetLastBlock");

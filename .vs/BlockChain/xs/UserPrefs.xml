@@ -1,0 +1,37 @@
+﻿<Properties StartupConfiguration="{E1596680-9B60-4D22-BBE3-0AAF79E9DC1F}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.BlockChain PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/BlockChainController.cs">
+    <Files>
+      <File FileName="Controllers/BlockChainController.cs" Line="28" Column="28" />
+      <File FileName="Services/IBlockChainService.cs" Line="1" Column="1" />
+      <File FileName="Services/Env.cs" Line="1" Column="1" />
+      <File FileName="Services/BlockChainService.cs" Line="71" Column="32" />
+      <File FileName="Models/Block.cs" Line="19" Column="1" />
+      <File FileName="Program.cs" Line="1" Column="1" />
+      <File FileName="Utils/Helpers.cs" Line="8" Column="36" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="BlockChain" expanded="True">
+            <Node name="BlockChain" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Services" expanded="True" />
+              <Node name="Utils" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>
