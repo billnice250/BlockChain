@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/billnice/blockchain_learn/CodeLabs/BlockChain/BlockChain.csproj": {}
+    "/Users/billnice/Projects/blockchain_learn/CodeLabs/BlockChain/BlockChain.csproj": {}
   },
   "projects": {
-    "/Users/billnice/blockchain_learn/CodeLabs/BlockChain/BlockChain.csproj": {
+    "/Users/billnice/Projects/blockchain_learn/CodeLabs/BlockChain/BlockChain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/billnice/blockchain_learn/CodeLabs/BlockChain/BlockChain.csproj",
+        "projectUniqueName": "/Users/billnice/Projects/blockchain_learn/CodeLabs/BlockChain/BlockChain.csproj",
         "projectName": "BlockChain",
-        "projectPath": "/Users/billnice/blockchain_learn/CodeLabs/BlockChain/BlockChain.csproj",
+        "projectPath": "/Users/billnice/Projects/blockchain_learn/CodeLabs/BlockChain/BlockChain.csproj",
         "packagesPath": "/Users/billnice/.nuget/packages/",
-        "outputPath": "/Users/billnice/blockchain_learn/CodeLabs/BlockChain/obj/",
+        "outputPath": "/Users/billnice/Projects/blockchain_learn/CodeLabs/BlockChain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/billnice/.nuget/NuGet/NuGet.Config"
@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "FileContextCore": {
+              "target": "Package",
+              "version": "[3.4.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
@@ -49,7 +53,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -61,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.302/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
         }
       }
     }

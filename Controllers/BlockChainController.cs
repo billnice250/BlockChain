@@ -1,3 +1,4 @@
+using it.billnice.BlockChain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace it.billnice.BlockChain.Controllers;
@@ -12,10 +13,6 @@ public class BlockChainController : ControllerBase
     {
         _logger = logger;
     }
-
-
-
-
     // GET: api/BlockChain/CurrentChain
     [HttpGet("CurrentChain")]
     public async Task<ActionResult<IEnumerable<Block>>> GetCurrentChain()

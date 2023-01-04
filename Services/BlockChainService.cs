@@ -1,4 +1,6 @@
 
+using it.billnice.BlockChain.Models;
+
 namespace it.billnice.BlockChain;
 public static class BlockChainService
 {
